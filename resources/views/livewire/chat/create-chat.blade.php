@@ -1,8 +1,9 @@
 <div>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Users') }}
-        </h2>
-    </x-slot>
+    <ul class="list-group w-75 mx-auto mt-3 container-fluid" style="height: 1000px">
+        @foreach ($users as $user)
+            <li class="list-group-item list-group-item-action" wire:click='checkconversation({{ $user->id }})'>
+                {{ $user->name }}</li>
+        @endforeach
+    </ul>
 </div>

@@ -8,36 +8,48 @@
         </div>
 
         <div class="img_container">
-            <img src="https://picsum.photos/id/237/200/300" alt="">
+            <img src="https://ui-avatars.com/api/?background=0D8ABC&color=fff&name={{ auth()->user()->name }}"
+                alt="">
         </div>
     </div>
 
     <div class="chatlist_body">
 
-        <div class="chatlist_item">
+        @if (count($conversations) > 0)
+            @foreach ($conversations as $conversation)
+                <div class="chatlist_item " wire:key='{{ $conversation->id }}'
+                    wire:click="$emit('chatUserSelected', {{ $conversation }},{{ $this->getChatUserInstance($conversation, $name = 'id') }})">
+                    <div class="chatlist_img_container">
 
-            <div class="chatlist_img_container">
-                <img src="https://picsum.photos/id/200/200/300" alt="">
-            </div>
-            <div class="chatlist_info">
-                <div class="top_row">
-                    <div class="list_username">John</div>
-                    <span class="date">2d</span>
-                </div>
-
-                <div class="bottom_row">
-                    <div class="message_body text-truncate">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, laborum quam labore porro
-                        quibusdam beatae modi mollitia accusantium pariatur ex aliquam dignissimos necessitatibus.
-                        Quaerat, ad optio? Consequatur, suscipit! Alias, veniam?
+                        <img src="https://ui-avatars.com/api/?name={{ $this->getChatUserInstance($conversation, $name = 'name') }}"
+                            alt="">
                     </div>
 
-                    <div class="unread_count">
-                        56
+                    <div class="chatlist_info">
+                        <div class="top_row">
+                            <div class="list_username">{{ $this->getChatUserInstance($conversation, $name = 'name') }}
+                            </div>
+                            <span class="date">
+                                {{ $conversation->messages->last()->created_at->shortAbsoluteDiffForHumans() }}</span>
+                        </div>
+
+                        <div class="bottom_row">
+
+                            <div class="message_body text-truncate">
+                                {{ $conversation->messages->last()->body }}
+                            </div>
+                            @php
+                                if (count($conversation->messages->where('read', 0)->where('receiver_id', Auth()->user()->id))) {
+                                    echo ' <div class="unread_count badge rounded-pill text-light bg-danger">  ' . count($conversation->messages->where('read', 0)->where('receiver_id', Auth()->user()->id)) . '</div> ';
+                                }
+                            @endphp
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            @endforeach
+        @else
+            you have no conversations
+        @endif
 
     </div>
 </div>
