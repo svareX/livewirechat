@@ -11,13 +11,11 @@
 
             </div>
 
-
             <div class="name">
                 {{ $receiverInstance->name }}
             </div>
 
             <div class="info">
-
                 <div class="info_item">
                     <i class="bi bi-telephone-fill"></i>
                 </div>
@@ -52,87 +50,56 @@
                                     }
                                 }
                             @endphp
-
-
                         </div>
                     </div>
                 </div>
             @endforeach
-
         </div>
-
 
         <script>
             $(".chatbox_body").on('scroll', function() {
-                // alert('aahsd');
                 var top = $('.chatbox_body').scrollTop();
-                //   alert('aasd');
                 if (top == 0) {
-
-                    window.livewire.emit('loadmore');
+                    window.livewire.emit('loadMore');
                 }
-
             });
         </script>
 
-
         <script>
             window.addEventListener('updatedHeight', event => {
-
                 let old = event.detail.height;
                 let newHeight = $('.chatbox_body')[0].scrollHeight;
-
                 let height = $('.chatbox_body').scrollTop(newHeight - old);
-
-
                 window.livewire.emit('updateHeight', {
                     height: height,
                 });
-
-
             });
         </script>
     @else
         <div class="fs-4 text-center text-primary mt-5">
             no conversasion selected
         </div>
-
-
-
-
     @endif
-
 
     <script>
         window.addEventListener('rowChatToBottom', event => {
-
             $('.chatbox_body').scrollTop($('.chatbox_body')[0].scrollHeight);
-
         });
     </script>
-
 
     <script>
         $(document).on('click', '.return', function() {
-
-
             window.livewire.emit('resetComponent');
-
         });
     </script>
-
 
     <script>
         window.addEventListener('markMessageAsRead', event => {
             var value = document.querySelectorAll('.status_tick');
-
             value.array.forEach(element, index => {
-
-
                 element.classList.remove('bi bi-check2');
                 element.classList.add('bi bi-check2-all', 'text-primary');
             });
-
         });
     </script>
 </div>

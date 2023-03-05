@@ -25,7 +25,6 @@
             $('.chatbox_body').scrollTop($('.chatbox_body')[0].scrollHeight);
             let height = $('.chatbox_body')[0].scrollHeight;
             window.livewire.emit('updateHeight', {
-
                 height: height,
             });
         });

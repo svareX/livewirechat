@@ -18,7 +18,7 @@ class Chatbox extends Component
     public $paginateVar = 10;
     public $height;
 
-    protected $listeners = ['loadConversation',];
+    protected $listeners = ['loadConversation', 'pushMessage', 'loadMore', 'updateHeight',];
     //protected $listeners = ['loadConversation', 'pushMessage', 'loadmore', 'updateHeight', "echo-private:chat. {$auth_id},MessageSent" => 'broadcastedMessageReceived',];
 
 
@@ -26,6 +26,27 @@ class Chatbox extends Component
     {
         $this->selectedConversation = null;
         $this->receiverInstance = null;
+    }
+    public function pushMessage($messageId)
+    {
+        $newMessage = Message::find($messageId);
+        $this->messages->push($newMessage);
+        $this->dispatchBrowserEvent('rowChatToBottom');
+    }
+    public function loadMore()
+    {
+        $this->paginateVar = $this->paginateVar + 10;
+        $this->messages_count = Message::where('conversation_id', $this->selectedConversation->id)->count();
+
+        $this->messages = Message::where('conversation_id',  $this->selectedConversation->id)
+            ->skip($this->messages_count -  $this->paginateVar)
+            ->take($this->paginateVar)->get();
+        $height = $this->height;
+        $this->dispatchBrowserEvent('updatedHeight', ($height));
+    }
+    public function updateHeight($height)
+    {
+        $this->height = $height;
     }
     public function loadConversation(Conversation $conversation, User $receiver)
     {

@@ -1,13 +1,15 @@
 <div>
     {{-- Because she competes with no one, no one can compete with her. --}}
-    <form action="">
-        <div class="chatbox_footer">
-            <div class="custom_form_group">
+    @if ($selectedConversation)
+        <form wire:submit.prevent='sendMessage' action="">
+            <div class="chatbox_footer">
+                <div class="custom_form_group">
+                    <input wire:model='body' type="text" class="control" placeholder="Write message">
+                    <button type="submit" class="submit">Send</button>
+                </div>
 
-                <input type="text" id="sendMessage" class="control" placeholder="Write message">
-                <button type="submit" class="submit">Send</button>
             </div>
+        </form>
+    @endif
 
-        </div>
-    </form>
 </div>
