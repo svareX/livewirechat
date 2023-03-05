@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Chat;
 
+use App\Events\MessageSent;
 use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\User;
@@ -15,6 +16,11 @@ class SendMessage extends Component
     public $createdMessage;
     protected $listeners = ['updateSendMessage', 'dispatchMessageSent', 'resetComponent'];
 
+    public function resetComponent()
+    {
+        $this->selectedConversation = null;
+        $this->receiverInstance = null;
+    }
     function updateSendMessage(Conversation $conversation, User $receiver)
     {
         $this->selectedConversation = $conversation;
@@ -41,7 +47,11 @@ class SendMessage extends Component
 
         $this->emitTo('chat.chat-list', 'refresh');
         $this->reset('body');
-        //$this->emitSelf('dispatchMessageSent');
+        $this->emitSelf('dispatchMessageSent');
+    }
+    public function dispatchMessageSent()
+    {
+        broadcast(new MessageSent(auth()->user(), $this->createdMessage, $this->selectedConversation, $this->receiverInstance));
     }
     public function render()
     {
