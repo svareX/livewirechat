@@ -38,7 +38,7 @@ Generate a new application key
     npm run dev
        
 **Now, you must leave this terminal window running and open a new one!**
-Create your database table.
+<p>Create your database table.</p>
 
     php artisan migrate
 
