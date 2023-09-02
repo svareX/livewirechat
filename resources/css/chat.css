@@ -229,7 +229,6 @@ body {
 .chat_box_container .chatbox_header .name {
   margin: auto 5px;
   cursor: pointer;
-  color: rgb(61, 61, 61);
   font-weight: lighter;
 }
 .chat_box_container .chatbox_header .info {
@@ -303,7 +302,6 @@ body {
   display: flex;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  background-color: white;
 }
 .chat_box_container .chatbox_footer .custom_form_group {
   margin: auto 0;
@@ -322,7 +320,6 @@ body {
   outline: none;
   -webkit-box-shadow: 0;
           box-shadow: 0;
-  background-color: rgba(226, 226, 226, 0.87);
   border-radius: 11px;
 }
 .chat_box_container .chatbox_footer .custom_form_group .control:focus {

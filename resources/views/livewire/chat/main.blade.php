@@ -1,6 +1,6 @@
 <div>
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
-    <div class="chat_container">
+    <div class="chat_container bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
 
         <div class="chat_list_container">
 
