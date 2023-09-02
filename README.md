@@ -45,6 +45,9 @@ Then all you need to do is to start a local Laravel server.
 <img src="https://i.ibb.co/k5xn8Ly/Sn-mek-obrazovky-2023-08-31-204025.png" alt="Sn-mek-obrazovky-2023-08-31-204025">
 </p>
 
+<p align="center">
+<img src="https://i.ibb.co/8gJdGRC/Fire-Shot-Capture-019-Laravel-localhost.png" alt="Fire-Shot-Capture-019-Laravel-localhost">
+</p>
 
 ## License
 MIT License
